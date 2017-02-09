@@ -6,8 +6,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-
 import es.uniovi.asw.parser.Citizen;
 
 public class PDFLetterGenerator implements LetterGenerator {
@@ -54,10 +52,8 @@ public class PDFLetterGenerator implements LetterGenerator {
 
 		} catch (FileNotFoundException | DocumentException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-
+		
 		return null;
 	}
 
