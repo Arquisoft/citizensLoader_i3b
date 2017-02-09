@@ -49,17 +49,17 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>info.cukes</groupId>
-		    <artifactId>cucumber-java8</artifactId>
-		    <version>1.2.5</version>
-		    <scope>test</scope>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java8</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>info.cukes</groupId>
-		    <artifactId>cucumber-java</artifactId>
-		    <version>1.2.5</version>
-		    <scope>test</scope>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>1.2.5</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -85,10 +85,16 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.15</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.10</version>
+		</dependency>
 	</dependencies>
 	<!--Build plugins -->
 	<build>
-	<sourceDirectory>src/main/java</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<pluginManagement>
 			<plugins>
 				<plugin>

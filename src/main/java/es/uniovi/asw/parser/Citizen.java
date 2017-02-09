@@ -5,6 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Oriol
+ * Class use to represent the citizens and parse their data.
+ */
 public class Citizen {
 	private String name;
 	private String surname;

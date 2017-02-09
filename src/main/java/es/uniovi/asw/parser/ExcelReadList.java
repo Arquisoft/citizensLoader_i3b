@@ -2,24 +2,21 @@ package es.uniovi.asw.parser;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.SecureRandom;
 import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
-public class ExcelReadList implements ReadList {
-	Set<Citizen> census;
-	private static final String passCharacters = "0123456789ABCDEFGHIJKLMNOP"
-			+ "QRSTUVWXYZabcdefghijklmnopqrstuvwxyz$-_¡!?¿@";
-	private static final int passLength = 12;
-
+/**
+ * @author Oriol
+ * Excel parser.
+ */
+public class ExcelReadList extends AbstractReadList {
+	
 	@Override
-	public void parse(String ruta) {
+	public void doParse(String ruta) {
 		POIFSFileSystem fs;
 		HSSFWorkbook wb = null;
 		HSSFSheet sheet;
@@ -49,24 +46,17 @@ public class ExcelReadList implements ReadList {
 					}
 				}
 				Citizen cit = new Citizen(data);
-				createPassword(cit);
-				census.add(cit);
+				if(census.contains(cit) /* || already in db*/) {
+					//TODO generate log.
+				} else {
+					census.add(cit);
+				}
 			}
 			
 			wb.close();
 		} catch (Exception ioe) {
 			ioe.printStackTrace();
 		}
-	}
-
-	private void createPassword(Citizen cit) {
-		SecureRandom rnd = new SecureRandom();
-		StringBuilder sb = new StringBuilder(passLength);
-		for (int i = 0; i < passLength; i++) {
-			sb.append(passCharacters
-					.charAt(rnd.nextInt(passCharacters.length())));
-		}
-		cit.setPassword(sb.toString());
 	}
 
 }

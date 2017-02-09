@@ -2,7 +2,7 @@ package es.uniovi.asw.parser;
 
 /**
  * @author uo245303
- *
+ * Parser Manager
  */
 public class SingletonParser {
 	private static SingletonParser instance;
@@ -19,7 +19,7 @@ public class SingletonParser {
 		return instance;
 	}
 
-	public ExcelReadList getExcelRL() {
+	public ExcelReadList getDefaultExcelReadList() {
 		return excelRL;
 	}
 }
