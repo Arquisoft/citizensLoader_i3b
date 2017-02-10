@@ -10,7 +10,7 @@ import es.uniovi.asw.parser.Citizen;
 public class ConsoleLetterGenerator implements LetterGenerator{
 
 	@Override
-	public String generatePersonalLetter(Citizen c) {
+	public void generatePersonalLetter(Citizen c) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("To: "+c.getEmail()+"\n");
 		sb.append("Subject: Login data\n");
@@ -19,7 +19,6 @@ public class ConsoleLetterGenerator implements LetterGenerator{
 		sb.append("\tUsername: "+c.getDni()+"\n");
 		sb.append("\tPassword: "+c.getPassword()+"\n");
 		System.out.println(c.getDni() +"letter sent.");
-		return sb.toString();
 	}
 
 }

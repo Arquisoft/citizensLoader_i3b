@@ -10,5 +10,5 @@ import es.uniovi.asw.parser.Citizen;
  * using other formats like Microsoft Word or PDF.
  */
 public interface LetterGenerator {
-	String generatePersonalLetter(Citizen c);
+	void generatePersonalLetter(Citizen c);
 }

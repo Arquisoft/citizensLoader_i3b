@@ -11,7 +11,7 @@ import es.uniovi.asw.parser.Citizen;
 public class PDFLetterGenerator implements LetterGenerator {
 
 	@Override
-	public String generatePersonalLetter(Citizen c) {
+	public void generatePersonalLetter(Citizen c) {
 		Document document = new Document();
 
 		try {
@@ -54,7 +54,6 @@ public class PDFLetterGenerator implements LetterGenerator {
 			e.printStackTrace();
 		}
 		
-		return null;
 	}
 
 }
