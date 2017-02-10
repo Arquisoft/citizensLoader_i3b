@@ -12,7 +12,8 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import es.uniovi.asw.parser.Citizen;
 
 /**
- * @author Oriol Excel parser.
+ * @author Oriol.
+ * Excel parser.
  */
 public class ExcelReadList extends AbstractReadList {
 
