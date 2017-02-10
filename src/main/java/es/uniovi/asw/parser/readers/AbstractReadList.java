@@ -1,7 +1,9 @@
-package es.uniovi.asw.parser;
+package es.uniovi.asw.parser.readers;
 
 import java.util.Set;
 
+import es.uniovi.asw.parser.Citizen;
+import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.letterGenerators.ConsoleLetterGenerator;
 import es.uniovi.asw.parser.letterGenerators.LetterGenerator;
 import es.uniovi.asw.parser.parserUtil.PasswordGenerator;
