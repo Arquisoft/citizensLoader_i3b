@@ -1,4 +1,6 @@
 language: java
+services: 
+- mongodb
 jdk:
 - oraclejdk8
 after_success:

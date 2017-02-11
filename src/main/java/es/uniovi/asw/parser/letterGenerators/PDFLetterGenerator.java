@@ -40,7 +40,7 @@ public class PDFLetterGenerator implements LetterGenerator {
 			Paragraph main = new Paragraph();
 			main.add("Mr/Mrs "+ c.getName() +" "+ c.getSurname()+",\n"
 					+ "Your login data has been generated:\n"
-					+ "\tUsername: "+c.getDni()+"\n"
+					+ "\tUsername: "+c.getEmail()+"\n"
 					+ "\tPassword: "+c.getPassword()+"\n");
 
 			document.add(main);

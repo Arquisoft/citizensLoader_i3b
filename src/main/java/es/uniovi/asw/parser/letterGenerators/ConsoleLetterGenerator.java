@@ -16,7 +16,7 @@ public class ConsoleLetterGenerator implements LetterGenerator{
 		sb.append("Subject: Login data\n");
 		sb.append("Mr/Mrs "+ c.getName() +" "+ c.getSurname()+",\n\n");
 		sb.append("Your login data has been generated:\n");
-		sb.append("\tUsername: "+c.getDni()+"\n");
+		sb.append("\tUsername: "+c.getEmail()+"\n");
 		sb.append("\tPassword: "+c.getPassword()+"\n");
 		System.out.println(c.getDni() +"letter sent.");
 	}

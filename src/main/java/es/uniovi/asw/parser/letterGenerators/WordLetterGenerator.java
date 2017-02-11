@@ -32,7 +32,7 @@ public class WordLetterGenerator implements LetterGenerator {
 			//Add text to the document 
 			run.setText("Mr/Mrs " + c.getName() + " " + c.getSurname() + ",\n"
 					+ "Your login data has been generated:\n" + "\tUsername: "
-					+ c.getDni() + "\n" + "\tPassword: " + c.getPassword()
+					+ c.getEmail() + "\n" + "\tPassword: " + c.getPassword()
 					+ "\n");
 			document.write(out);
 			out.close();

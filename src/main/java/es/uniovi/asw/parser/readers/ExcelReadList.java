@@ -44,11 +44,13 @@ public class ExcelReadList extends AbstractReadList {
 				if (data != null) {
 					cit = new Citizen(data);
 				} else {
-					// TODO error row or cell empty, generate log.
+					// TODO error row empty, generate log.
 				}
-
-				if (census.contains(cit) /* || already in db */) {
-					// TODO generate log.
+				
+				if (cit.getDni() == null) {
+					// TODO generate log. Null DNI.
+				} else if(census.contains(cit)) {
+					// TODO generate log. Duplicated DNI.
 				} else {
 					census.add(cit);
 				}
@@ -69,8 +71,6 @@ public class ExcelReadList extends AbstractReadList {
 				cell = row.getCell((short) c);
 				if (cell != null) {
 					data[c] = cell.toString();
-				} else {
-					return null;
 				}
 			}
 			return data;
