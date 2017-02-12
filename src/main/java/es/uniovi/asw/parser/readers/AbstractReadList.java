@@ -1,5 +1,6 @@
 package es.uniovi.asw.parser.readers;
 
+import java.io.File;
 import java.util.Set;
 
 import es.uniovi.asw.database.InsertDB;
@@ -37,13 +38,13 @@ public abstract class AbstractReadList implements ReadList {
 	
 	@Override
 	public void parse(String ruta) {
-		doParse(ruta);
+		doParse(new File(ruta));
 		PasswordGenerator.createPasswords(census);
 		generateLetters();
 		//TODO Send data to db manager.
 	}
 
-	protected abstract void doParse(String ruta);
+	protected abstract void doParse(File file);
 	
 	private void generateLetters() {
 		for(Citizen c: census) {

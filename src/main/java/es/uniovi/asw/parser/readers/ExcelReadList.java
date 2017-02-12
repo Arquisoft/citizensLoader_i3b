@@ -18,13 +18,13 @@ import es.uniovi.asw.parser.Citizen;
 public class ExcelReadList extends AbstractReadList {
 
 	@Override
-	public void doParse(String ruta) {
+	public void doParse(File file) {
 		POIFSFileSystem fs;
 		HSSFWorkbook wb = null;
 		HSSFSheet sheet;
 		HSSFRow row;
 		try {
-			fs = new POIFSFileSystem(new FileInputStream(new File(ruta)));
+			fs = new POIFSFileSystem(new FileInputStream(file));
 			wb = new HSSFWorkbook(fs);
 			sheet = wb.getSheetAt(0);
 			census = new HashSet<Citizen>();
@@ -44,13 +44,13 @@ public class ExcelReadList extends AbstractReadList {
 				if (data != null) {
 					cit = new Citizen(data);
 				} else {
-					// TODO error row empty, generate log.
+					wReport.report(file, "Empty row nº"+r);
 				}
 				
 				if (cit.getDni() == null) {
-					// TODO generate log. Null DNI.
+					wReport.report(file, "Null DNI on row number "+r);
 				} else if(census.contains(cit)) {
-					// TODO generate log. Duplicated DNI.
+					wReport.report(file, "Duplicated citizen on row number "+r);
 				} else {
 					census.add(cit);
 				}
