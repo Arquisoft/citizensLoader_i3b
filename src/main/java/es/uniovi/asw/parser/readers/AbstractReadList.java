@@ -3,15 +3,13 @@ package es.uniovi.asw.parser.readers;
 import java.io.File;
 import java.util.Set;
 
-import es.uniovi.asw.database.InsertDB;
-import es.uniovi.asw.database.SingletonDatabaseManager;
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
-import es.uniovi.asw.parser.letterGenerators.ConsoleLetterGenerator;
-import es.uniovi.asw.parser.letterGenerators.LetterGenerator;
-import es.uniovi.asw.parser.parserUtil.PasswordGenerator;
-import es.uniovi.asw.reportWriter.WriteReport;
-import es.uniovi.asw.reportWriter.WriteReportPort;
+import es.uniovi.asw.parser.lettergenerators.ConsoleLetterGenerator;
+import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
+import es.uniovi.asw.parser.parserutil.PasswordGenerator;
+import es.uniovi.asw.reportwriter.WriteReport;
+import es.uniovi.asw.reportwriter.WriteReportPort;
 
 /**
  * @author Oriol
@@ -19,21 +17,18 @@ import es.uniovi.asw.reportWriter.WriteReportPort;
  */
 public abstract class AbstractReadList implements ReadList {
 
-	Set<Citizen> census;
+	protected Set<Citizen> census;
 	private LetterGenerator letterGen;
 	protected WriteReport wReport;
-	protected InsertDB insertDB;
 	
 	public AbstractReadList() {
 		this.letterGen = new ConsoleLetterGenerator();
 		this.wReport = new WriteReportPort();
-		this.insertDB = SingletonDatabaseManager.getInstance().getInsertMongo();
 	}
 	
 	public AbstractReadList(LetterGenerator letterGenerator) {
 		this.letterGen = letterGenerator;
 		this.wReport = new WriteReportPort();
-		this.insertDB = SingletonDatabaseManager.getInstance().getInsertMongo();
 	}
 	
 	@Override

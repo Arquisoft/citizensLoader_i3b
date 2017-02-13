@@ -1,4 +1,4 @@
-package es.uniovi.asw.parser.letterGenerators;
+package es.uniovi.asw.parser.lettergenerators;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;

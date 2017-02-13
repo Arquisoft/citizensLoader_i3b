@@ -1,4 +1,4 @@
-package es.uniovi.asw.parser.parserUtil;
+package es.uniovi.asw.parser.parserutil;
 
 import java.security.SecureRandom;
 import java.util.Set;
