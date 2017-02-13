@@ -1,9 +1,11 @@
 package es.uniovi.asw.parser;
 
+import java.util.Set;
+
 /**
  * @author Oriol
  * 
  */
 public interface ReadList {
-	void parse(String ruta);
+	Set<Citizen> parse(String ruta);
 }

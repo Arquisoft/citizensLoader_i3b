@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author Oriol
+ * @author Oriol.
  * Class use to represent the citizens and parse their data.
  */
 public class Citizen {
@@ -21,9 +21,9 @@ public class Citizen {
 	private String NIF;
 	private int pollingStation;
 
-	public Citizen(String firstName, String lastName, String email, String birthDate,
-			String address, String nationality, String ID, String NIF,
-			String pollingStation) {
+	public Citizen(String firstName, String lastName, String email,
+			String birthDate, String address, String nationality, String ID,
+			String NIF, String pollingStation) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,17 +36,6 @@ public class Citizen {
 		this.pollingStation = Integer.parseInt(pollingStation);
 	}
 
-	private void setbirthDate(String birthDate) {
-		DateFormat format = new SimpleDateFormat("d/M/y");
-		Date date = null;
-		try {
-			date = format.parse(birthDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.birthDate = date;
-	}
-
 	public Citizen(String[] data) {
 		this.firstName = data[0];
 		this.lastName = data[1];
@@ -56,7 +45,18 @@ public class Citizen {
 		this.nationality = data[5];
 		this.ID = data[6];
 		this.NIF = data[7];
-		this.pollingStation = Integer.parseInt(data[8]);
+		this.pollingStation = Integer.parseInt(data[8].replace(".0", ""));
+	}
+	
+	private void setbirthDate(String birthDate) {
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = null;
+		try {
+			date = format.parse(birthDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.birthDate = date;
 	}
 
 	public String getNationality() {
@@ -90,7 +90,7 @@ public class Citizen {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String pw) {
 		this.password = pw;
 	}
@@ -130,10 +130,10 @@ public class Citizen {
 
 	@Override
 	public String toString() {
-		return "Citizen [firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", birthDate=" + birthDate + ", address=" + address + ", ID="
-				+ ID + ", password=" + password + ", nationality="
-				+ nationality + ", NIF=" + NIF + ", pollingStation=" + pollingStation + "]";
+		return "Citizen [firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", birthDate=" + birthDate + ", address="
+				+ address + ", ID=" + ID + ", nationality=" + nationality + ","
+				+ " NIF=" + NIF +", pollingStation=" + pollingStation + "]";
 	}
 
 }

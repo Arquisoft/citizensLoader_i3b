@@ -1,6 +1,7 @@
 package es.uniovi.asw.parser.readers;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Set;
 
 import es.uniovi.asw.parser.Citizen;
@@ -32,14 +33,18 @@ public abstract class AbstractReadList implements ReadList {
 	}
 	
 	@Override
-	public void parse(String ruta) {
-		doParse(new File(ruta));
+	public Set<Citizen> parse(String ruta) {
+		try {
+			doParse(new FileInputStream(ruta));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		PasswordGenerator.createPasswords(census);
 		generateLetters();
-		//TODO Send data to db manager.
+		return census;
 	}
 
-	protected abstract void doParse(File file);
+	protected abstract void doParse(FileInputStream fileInputStream);
 	
 	private void generateLetters() {
 		for(Citizen c: census) {

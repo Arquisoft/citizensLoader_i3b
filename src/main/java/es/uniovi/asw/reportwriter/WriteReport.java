@@ -1,7 +1,7 @@
 package es.uniovi.asw.reportwriter;
 
-import java.io.File;
+import java.io.FileInputStream;
 
 public interface WriteReport {
-	void report(File source, String error);
+	void report(FileInputStream file, String error);
 }

@@ -19,6 +19,7 @@ public class InsertMongo implements InsertDB {
 		document.put("firstName", c.getName());
 		document.put("lastName", c.getlastName());
 		document.put("email", c.getEmail());
+		document.put("password", c.getPassword());
 		document.put("dateOfBirth", c.getID());
 		document.put("address", c.getAddress());
 		document.put("nationality", c.getNationality());
