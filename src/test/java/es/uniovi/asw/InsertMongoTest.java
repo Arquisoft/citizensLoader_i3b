@@ -19,7 +19,6 @@ import es.uniovi.asw.parser.Citizen;
 
 public class InsertMongoTest {
 
-	private DB db;
 	private MongoClient client;
 	private DBCollection users;
 	private Citizen dummy;
@@ -38,7 +37,7 @@ public class InsertMongoTest {
 				"132456789", "1234");
 
 		client = new MongoClient("localhost", 27017);
-		db = client.getDB("test");
+		DB db = client.getDB("test");
 		db.getCollection("test").remove(new BasicDBObject());
 		users = db.getCollection("test");
 		users.createIndex(new BasicDBObject("id", 1),
