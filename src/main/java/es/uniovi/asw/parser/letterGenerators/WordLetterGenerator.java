@@ -30,7 +30,7 @@ public class WordLetterGenerator implements LetterGenerator {
 			XWPFRun run = paragraph.createRun();
 			
 			//Add text to the document 
-			run.setText("Mr/Mrs " + c.getName() + " " + c.getSurname() + ",\n"
+			run.setText("Mr/Mrs " + c.getName() + " " + c.getlastName() + ",\n"
 					+ "Your login data has been generated:\n" + "\tUsername: "
 					+ c.getEmail() + "\n" + "\tPassword: " + c.getPassword()
 					+ "\n");

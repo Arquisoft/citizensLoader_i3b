@@ -47,7 +47,7 @@ public class ExcelReadList extends AbstractReadList {
 					wReport.report(file, "Empty row nº"+r);
 				}
 				
-				if (cit.getDni() == null) {
+				if (cit.getID() == null) {
 					wReport.report(file, "Null DNI on row number "+r);
 				} else if(census.contains(cit)) {
 					wReport.report(file, "Duplicated citizen on row number "+r);

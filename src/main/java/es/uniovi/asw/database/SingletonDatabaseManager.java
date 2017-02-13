@@ -1,5 +1,8 @@
 package es.uniovi.asw.database;
 
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+
 /**
  * 
  * @author Oriol
@@ -8,9 +11,14 @@ package es.uniovi.asw.database;
 public class SingletonDatabaseManager {
 	private static SingletonDatabaseManager instance;
 	private InsertDB insertM;
+	private MongoClient mongo;
 
 	private SingletonDatabaseManager() {
-		insertM = new InsertMongo();
+		mongo = new MongoClient("localhost", 27017);
+		
+		@SuppressWarnings("deprecation")
+		DB db = mongo.getDB("Citizens");
+		insertM = new InsertMongo(db);
 	}
 
 	public static SingletonDatabaseManager getInstance() {

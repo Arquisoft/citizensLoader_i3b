@@ -10,53 +10,53 @@ import java.util.Date;
  * Class use to represent the citizens and parse their data.
  */
 public class Citizen {
-	private String name;
-	private String surname;
+	private String firstName;
+	private String lastName;
 	private String email;
-	private Date dob;
+	private Date birthDate;
 	private String address;
-	private String dni;
+	private String ID;
 	private String password;
 	private String nationality;
-	private String nif;
-	private int ps;
+	private String NIF;
+	private int pollingStation;
 
-	public Citizen(String name, String surname, String email, String dob,
-			String address, String nationality, String dni, String NIF,
+	public Citizen(String firstName, String lastName, String email, String birthDate,
+			String address, String nationality, String ID, String NIF,
 			String pollingStation) {
 
-		this.name = name;
-		this.surname = surname;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
-		setDob(dob);
+		setbirthDate(birthDate);
 		this.address = address;
 		this.nationality = nationality;
-		this.dni = dni;
-		this.nif = NIF;
-		this.ps = Integer.parseInt(pollingStation);
+		this.ID = ID;
+		this.NIF = NIF;
+		this.pollingStation = Integer.parseInt(pollingStation);
 	}
 
-	private void setDob(String dob) {
+	private void setbirthDate(String birthDate) {
 		DateFormat format = new SimpleDateFormat("d/M/y");
 		Date date = null;
 		try {
-			date = format.parse(dob);
+			date = format.parse(birthDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		this.dob = date;
+		this.birthDate = date;
 	}
 
 	public Citizen(String[] data) {
-		this.name = data[0];
-		this.surname = data[1];
+		this.firstName = data[0];
+		this.lastName = data[1];
 		this.email = data[2];
-		setDob(data[3]);
+		setbirthDate(data[3]);
 		this.address = data[4];
 		this.nationality = data[5];
-		this.dni = data[6];
-		this.nif = data[7];
-		this.ps = Integer.parseInt(data[8]);
+		this.ID = data[6];
+		this.NIF = data[7];
+		this.pollingStation = Integer.parseInt(data[8]);
 	}
 
 	public String getNationality() {
@@ -64,27 +64,27 @@ public class Citizen {
 	}
 
 	public String getName() {
-		return name;
+		return firstName;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getlastName() {
+		return lastName;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public Date getDob() {
-		return dob;
+	public Date getbirthDate() {
+		return birthDate;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
-	public String getDni() {
-		return dni;
+	public String getID() {
+		return ID;
 	}
 
 	public String getPassword() {
@@ -95,19 +95,19 @@ public class Citizen {
 		this.password = pw;
 	}
 
-	public String getNif() {
-		return nif;
+	public String getNIF() {
+		return NIF;
 	}
 
-	public int getPs() {
-		return ps;
+	public int getpollingStation() {
+		return pollingStation;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ((ID == null) ? 0 : ID.hashCode());
 		return result;
 	}
 
@@ -120,20 +120,20 @@ public class Citizen {
 		if (getClass() != obj.getClass())
 			return false;
 		Citizen other = (Citizen) obj;
-		if (dni == null) {
-			if (other.dni != null)
+		if (ID == null) {
+			if (other.ID != null)
 				return false;
-		} else if (!dni.equals(other.dni))
+		} else if (!ID.equals(other.ID))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Citizen [name=" + name + ", surname=" + surname + ", email="
-				+ email + ", dob=" + dob + ", address=" + address + ", dni="
-				+ dni + ", password=" + password + ", nationality="
-				+ nationality + ", nif=" + nif + ", ps=" + ps + "]";
+		return "Citizen [firstName=" + firstName + ", lastName=" + lastName + ", email="
+				+ email + ", birthDate=" + birthDate + ", address=" + address + ", ID="
+				+ ID + ", password=" + password + ", nationality="
+				+ nationality + ", NIF=" + NIF + ", pollingStation=" + pollingStation + "]";
 	}
 
 }

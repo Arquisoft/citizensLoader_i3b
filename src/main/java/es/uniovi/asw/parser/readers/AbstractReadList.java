@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Set;
 
 import es.uniovi.asw.database.InsertDB;
-import es.uniovi.asw.database.InsertMongo;
+import es.uniovi.asw.database.SingletonDatabaseManager;
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.letterGenerators.ConsoleLetterGenerator;
@@ -27,13 +27,13 @@ public abstract class AbstractReadList implements ReadList {
 	public AbstractReadList() {
 		this.letterGen = new ConsoleLetterGenerator();
 		this.wReport = new WriteReportPort();
-		this.insertDB = new InsertMongo();
+		this.insertDB = SingletonDatabaseManager.getInstance().getInsertMongo();
 	}
 	
 	public AbstractReadList(LetterGenerator letterGenerator) {
 		this.letterGen = letterGenerator;
 		this.wReport = new WriteReportPort();
-		this.insertDB = new InsertMongo();
+		this.insertDB = SingletonDatabaseManager.getInstance().getInsertMongo();
 	}
 	
 	@Override
