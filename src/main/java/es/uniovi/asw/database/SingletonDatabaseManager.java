@@ -13,7 +13,7 @@ import com.mongodb.MongoClient;
 public class SingletonDatabaseManager {
 	private static SingletonDatabaseManager instance;
 	private InsertDB insertM;
-	private static MongoClient mongo;
+	private MongoClient mongo;
 
 	private SingletonDatabaseManager() {
 		mongo = new MongoClient("localhost", 27017);
@@ -47,7 +47,7 @@ public class SingletonDatabaseManager {
 	 */
 	public static void closeClient() {
 		if (instance != null) {
-			mongo.close();
+			instance.mongo.close();
 		}
 	}
 }
