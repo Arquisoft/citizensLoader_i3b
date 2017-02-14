@@ -32,6 +32,10 @@ public class ExcelParseTest {
 	}
 
 	@Test
+	/**
+	 * Este test no comprueba nada Simplemente lo utilizo para ver si se escribe
+	 * el error correspondiente en el archivo de logging
+	 */
 	public void fileNotFound() {
 		ReadList rl = new ExcelReadList();
 		readData = rl.parse("archivoQueNoExiste");
@@ -39,6 +43,10 @@ public class ExcelParseTest {
 	}
 
 	@Test
+	/**
+	 * Este test no comprueba nada Simplemente lo utilizo para ver si se escribe
+	 * el error correspondiente en el archivo de logging
+	 */
 	public void testFilaSinDNI() {
 		ReadList rl = new ExcelReadList();
 		readData = rl.parse("src/test/resources/test3.xlsx");

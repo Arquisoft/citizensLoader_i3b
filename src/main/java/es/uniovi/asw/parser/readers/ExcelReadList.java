@@ -56,16 +56,28 @@ public class ExcelReadList extends AbstractReadList {
 				String[] data = parseRow(row, cols);
 
 				Citizen cit = null;
+
+				/**
+				 * Cambie las siguientes lineas porque si creabas un nuevo
+				 * citizen con algunos datos nulos (por ejemplo la fecha de
+				 * nacimiento) en ocasiones daba null pointer exceptions
+				 * 
+				 * Además ahora comprueba que la fila tenga todos los datos
+				 * cumplimentados y sino se loggea el error
+				 */
+
 				if (data != null) {
 
 					if (data[6] == null) {
 						wReport.report("Null DNI on row number " + r, ruta);
+					} else if (data[1] == null) {
+						wReport.report("Null name on row number " + r, ruta);
 					} else if (data[2] == null) {
 						wReport.report("Null birth date on row number " + r, ruta);
 					} else if (data[4] == null) {
 						wReport.report("Null address on row number " + r, ruta);
 					} else if (data[1] == null) {
-						wReport.report("Null address on row number " + r, ruta);
+						wReport.report("Null last name on row number " + r, ruta);
 					} else {
 						if (census.contains(cit)) {
 							wReport.report("Duplicated citizen on row number " + r, ruta);

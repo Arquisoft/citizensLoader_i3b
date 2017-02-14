@@ -17,6 +17,13 @@ public class InsertMongo implements InsertDB {
 	private MongoClient mongo;
 	private WriteReport reporter;
 
+	/**
+	 * Constructor por defecto el cual inicializa la base de datos con los
+	 * parametros por defecto
+	 * 
+	 * Si tenemos tiempo podemos mover todos los parametros de inicializacion a
+	 * un fichero de properties
+	 */
 	public InsertMongo() {
 		this.reporter = new WriteReportPort();
 
