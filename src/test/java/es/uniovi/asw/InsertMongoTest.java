@@ -28,15 +28,19 @@ public class InsertMongoTest {
 	@SuppressWarnings("deprecation")
 	@Before
 	public void insertCitizen() {
-		dummy = new Citizen("a", "b", "a@a.com", "10/10/2010", "a", "a", "123456789Z", "132456789", "1234");
-		dummy1 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a", "a", "2", "132456789", "1234");
-		dummy2 = new Citizen("a", "b", "c@a.com", "10/10/2010", "a", "a", "3", "132456789", "1234");
+		dummy = new Citizen("a", "b", "a@a.com", "10/10/2010", "a", "a",
+				"123456789Z", "132456789", "1234");
+		dummy1 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a", "a", "2",
+				"132456789", "1234");
+		dummy2 = new Citizen("a", "b", "c@a.com", "10/10/2010", "a", "a", "3",
+				"132456789", "1234");
 
 		client = new MongoClient("localhost", 27017);
 		DB db = client.getDB("test");
 		db.getCollection("test").remove(new BasicDBObject());
 		users = db.getCollection("test");
-		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject("unique", true));
+		users.createIndex(new BasicDBObject("id", 1),
+				new BasicDBObject("unique", true));
 
 		insert = new InsertMongo(users);
 	}
