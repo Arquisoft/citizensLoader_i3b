@@ -28,6 +28,8 @@ public class WriteReportPort implements WriteReport {
 	private SimpleDateFormat formatoNombreArchivo = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 	private SimpleDateFormat formatoFechaHoraReport = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
 
+	private Logger log = Logger.getRootLogger();
+
 	/**
 	 * Constructor el cual en función de la fecha de hoy busca el archivo en el
 	 * cual tiene que escribir los errores
@@ -70,13 +72,16 @@ public class WriteReportPort implements WriteReport {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
 
-			writer.append("Fecha y hora: " + formatoFechaHoraReport.format(new Date()));
-			writer.newLine();
-			writer.append("Nombre del archivo: " + archivo);
-			writer.newLine();
-			writer.append("Error: " + mensajeDeError);
-			writer.newLine();
-			writer.newLine();
+			StringBuilder error = new StringBuilder();
+			error.append("ERROR \n");
+			error.append("------------------------------\n");
+			error.append("Fecha y hora: " + formatoFechaHoraReport.format(new Date()) + "\n");
+			error.append("Nombre del archivo: " + archivo + "\n");
+			error.append("Error: " + mensajeDeError + "\n\n");
+
+			writer.append(error);
+			log.info(error);
+
 			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -97,15 +102,20 @@ public class WriteReportPort implements WriteReport {
 	 */
 	public void report(Exception e, String mensajeDeError) {
 		try {
+
 			BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
 
-			writer.append("Fecha y hora: " + formatoFechaHoraReport.format(new Date()));
-			writer.newLine();
-			writer.append("Error: " + mensajeDeError);
-			writer.newLine();
-			writer.append("Mensaje excepcion: " + e.getMessage());
-			writer.newLine();
-			writer.newLine();
+			StringBuilder error = new StringBuilder();
+
+			error.append("ERROR \n");
+			error.append("------------------------------\n");
+			error.append("Fecha y hora: " + formatoFechaHoraReport.format(new Date()) + "\n");
+			error.append("Error: " + mensajeDeError + "\n");
+			error.append("Mensaje excepcion: " + e.getMessage() + "\n\n");
+
+			writer.append(error);
+			log.info(error);
+
 			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
