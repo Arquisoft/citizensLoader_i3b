@@ -5,7 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CalculatorTest.class, ExcelParseTest.class, InsertMongoTest.class, PasswordTest.class })
+@SuiteClasses({ ExcelParseTest.class, InsertMongoTest.class,
+	PasswordTest.class, CitizenTest.class, DatabaseManagerTest.class,
+	SingletonParserTest.class})
 public class AllTests {
 
 }
