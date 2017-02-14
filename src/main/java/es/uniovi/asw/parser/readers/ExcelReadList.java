@@ -39,7 +39,7 @@ public class ExcelReadList extends AbstractReadList {
 
 		try {
 			FileInputStream file = new FileInputStream(ruta);
-			;
+
 			wb = new XSSFWorkbook(OPCPackage.open(file));
 			sheet = wb.getSheetAt(0);
 			census = new HashSet<Citizen>();
@@ -73,16 +73,20 @@ public class ExcelReadList extends AbstractReadList {
 					} else if (data[1] == null) {
 						wReport.report("Null name on row number " + r, ruta);
 					} else if (data[2] == null) {
-						wReport.report("Null birth date on row number " + r, ruta);
+						wReport.report("Null birth date on row number " + r,
+								ruta);
 					} else if (data[4] == null) {
 						wReport.report("Null address on row number " + r, ruta);
 					} else if (data[1] == null) {
-						wReport.report("Null last name on row number " + r, ruta);
+						wReport.report("Null last name on row number " + r,
+								ruta);
 					} else {
+						cit = new Citizen(data);
 						if (census.contains(cit)) {
-							wReport.report("Duplicated citizen on row number " + r, ruta);
+							wReport.report(
+									"Duplicated citizen on row number " + r,
+									ruta);
 						} else {
-							cit = new Citizen(data);
 							census.add(cit);
 						}
 
@@ -112,8 +116,10 @@ public class ExcelReadList extends AbstractReadList {
 			for (int c = 0; c < cols; c++) {
 				cell = row.getCell((short) c);
 				if (cell != null) {
-					if (cell.getCellTypeEnum() == CellType.NUMERIC && DateUtil.isCellDateFormatted(cell)) {
-						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					if (cell.getCellTypeEnum() == CellType.NUMERIC
+							&& DateUtil.isCellDateFormatted(cell)) {
+						SimpleDateFormat sdf = new SimpleDateFormat(
+								"dd/MM/yyyy");
 						data[c] = sdf.format(cell.getDateCellValue());
 					} else {
 						data[c] = cell.toString();

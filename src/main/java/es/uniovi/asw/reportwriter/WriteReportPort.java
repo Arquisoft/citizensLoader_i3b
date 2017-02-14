@@ -25,8 +25,10 @@ import org.apache.log4j.Logger;
 public class WriteReportPort implements WriteReport {
 
 	private File archivo;
-	private SimpleDateFormat formatoNombreArchivo = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-	private SimpleDateFormat formatoFechaHoraReport = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+	private SimpleDateFormat formatoNombreArchivo = new SimpleDateFormat(
+			"dd-MM-yyyy", Locale.getDefault());
+	private SimpleDateFormat formatoFechaHoraReport = new SimpleDateFormat(
+			"dd-MM-yyyy HH:mm:ss", Locale.getDefault());
 
 	private Logger log = Logger.getRootLogger();
 
@@ -40,7 +42,8 @@ public class WriteReportPort implements WriteReport {
 	public WriteReportPort() {
 
 		Date fechaActual = new Date();
-		String nombreFichero = formatoNombreArchivo.format(fechaActual);
+		String nombreFichero = formatoNombreArchivo.format(fechaActual)
+				+ ".txt";
 		this.archivo = new File(nombreFichero);
 
 		try {
@@ -70,12 +73,14 @@ public class WriteReportPort implements WriteReport {
 	 */
 	public void report(String mensajeDeError, String archivo) {
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(archivo, true));
 
 			StringBuilder error = new StringBuilder();
 			error.append("ERROR \n");
 			error.append("------------------------------\n");
-			error.append("Fecha y hora: " + formatoFechaHoraReport.format(new Date()) + "\n");
+			error.append("Fecha y hora: "
+					+ formatoFechaHoraReport.format(new Date()) + "\n");
 			error.append("Nombre del archivo: " + archivo + "\n");
 			error.append("Error: " + mensajeDeError + "\n\n");
 
@@ -103,13 +108,15 @@ public class WriteReportPort implements WriteReport {
 	public void report(Exception e, String mensajeDeError) {
 		try {
 
-			BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(archivo, true));
 
 			StringBuilder error = new StringBuilder();
 
 			error.append("ERROR \n");
 			error.append("------------------------------\n");
-			error.append("Fecha y hora: " + formatoFechaHoraReport.format(new Date()) + "\n");
+			error.append("Fecha y hora: "
+					+ formatoFechaHoraReport.format(new Date()) + "\n");
 			error.append("Error: " + mensajeDeError + "\n");
 			error.append("Mensaje excepcion: " + e.getMessage() + "\n\n");
 

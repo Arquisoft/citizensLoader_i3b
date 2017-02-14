@@ -2,6 +2,10 @@ package es.uniovi.asw;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
 
 import org.junit.Test;
@@ -37,9 +41,16 @@ public class ExcelParseTest {
 	 * el error correspondiente en el archivo de logging
 	 */
 	public void fileNotFound() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
 		ReadList rl = new ExcelReadList();
 		readData = rl.parse("archivoQueNoExiste");
-
+		
+		assertTrue(file.exists());
 	}
 
 	@Test
@@ -48,8 +59,16 @@ public class ExcelParseTest {
 	 * el error correspondiente en el archivo de logging
 	 */
 	public void testFilaSinDNI() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
 		ReadList rl = new ExcelReadList();
 		readData = rl.parse("src/test/resources/test3.xlsx");
+		
+		assertTrue(file.exists());
 	}
 
 }

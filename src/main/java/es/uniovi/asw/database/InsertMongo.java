@@ -1,10 +1,8 @@
 package es.uniovi.asw.database;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DuplicateKeyException;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
 import es.uniovi.asw.parser.Citizen;
@@ -14,28 +12,13 @@ import es.uniovi.asw.reportwriter.WriteReportPort;
 public class InsertMongo implements InsertDB {
 
 	private DBCollection users;
-	private MongoClient mongo;
 	private WriteReport reporter;
 
 	/**
-	 * Constructor por defecto el cual inicializa la base de datos con los
-	 * parametros por defecto
-	 * 
-	 * Si tenemos tiempo podemos mover todos los parametros de inicializacion a
-	 * un fichero de properties
+	 * Constructor that should be used.
+	 * Creation of the database should be in the manager.
+	 * @param users - mongo collection
 	 */
-	public InsertMongo() {
-		this.reporter = new WriteReportPort();
-
-		mongo = new MongoClient("localhost", 27017);
-
-		@SuppressWarnings("deprecation")
-		DB db = mongo.getDB("Citizens");
-		DBCollection users = db.getCollection("users");
-		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject("unique", true));
-		this.users = users;
-	}
-
 	public InsertMongo(DBCollection users) {
 		this.reporter = new WriteReportPort();
 
@@ -59,14 +42,11 @@ public class InsertMongo implements InsertDB {
 		try {
 			users.insert(document);
 		} catch (DuplicateKeyException me) {
-			reporter.report(me, "Fallo al insertar en la base de datos: La clave introducida ya está en uso");
+			reporter.report(me,"Fallo al insertar en la base de datos: "
+					+ "La clave introducida ya está en uso");
 		} catch (MongoException me) {
 			reporter.report(me, "Fallo al insertar en la base de datos");
 		}
-	}
-
-	public void resetDatabase() {
-
 	}
 
 }
