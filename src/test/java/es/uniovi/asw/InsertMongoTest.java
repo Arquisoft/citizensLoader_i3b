@@ -1,6 +1,6 @@
 package es.uniovi.asw;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +10,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.DuplicateKeyException;
 import com.mongodb.MongoClient;
 
 import es.uniovi.asw.database.InsertDB;
@@ -29,19 +28,15 @@ public class InsertMongoTest {
 	@SuppressWarnings("deprecation")
 	@Before
 	public void insertCitizen() {
-		dummy = new Citizen("a", "b", "a@a.com", "10/10/2010", "a", "a",
-				"123456789Z", "132456789", "1234");
-		dummy1 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a", "a", "2",
-				"132456789", "1234");
-		dummy2 = new Citizen("a", "b", "c@a.com", "10/10/2010", "a", "a", "3",
-				"132456789", "1234");
+		dummy = new Citizen("a", "b", "a@a.com", "10/10/2010", "a", "a", "123456789Z", "132456789", "1234");
+		dummy1 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a", "a", "2", "132456789", "1234");
+		dummy2 = new Citizen("a", "b", "c@a.com", "10/10/2010", "a", "a", "3", "132456789", "1234");
 
 		client = new MongoClient("localhost", 27017);
 		DB db = client.getDB("test");
 		db.getCollection("test").remove(new BasicDBObject());
 		users = db.getCollection("test");
-		users.createIndex(new BasicDBObject("id", 1),
-				new BasicDBObject("unique", true));
+		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject("unique", true));
 
 		insert = new InsertMongo(users);
 	}
@@ -81,10 +76,13 @@ public class InsertMongoTest {
 
 	}
 
-	@Test(expected = DuplicateKeyException.class)
+	@Test
 	public void testNoDuplicates() {
 		insert.insert(dummy);
 		insert.insert(dummy);
+
+		DBCursor cursor = users.find();
+		assertEquals(cursor.size(), 1);
 	}
 
 	@After
