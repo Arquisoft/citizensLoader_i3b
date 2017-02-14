@@ -1,6 +1,7 @@
 package es.uniovi.asw.parser.readers;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
@@ -17,8 +18,7 @@ import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.lettergenerators.LetterGenerator;
 
 /**
- * @author Oriol.
- * Excel parser.
+ * @author Oriol. Excel parser.
  */
 public class ExcelReadList extends AbstractReadList {
 
@@ -31,12 +31,15 @@ public class ExcelReadList extends AbstractReadList {
 	}
 
 	@Override
-	public void doParse(FileInputStream file) {
+	public void doParse(String ruta) {
+
 		XSSFWorkbook wb = null;
 		XSSFSheet sheet;
 		XSSFRow row;
-		try {
 
+		try {
+			FileInputStream file = new FileInputStream(ruta);
+			;
 			wb = new XSSFWorkbook(OPCPackage.open(file));
 			sheet = wb.getSheetAt(0);
 			census = new HashSet<Citizen>();
@@ -54,23 +57,36 @@ public class ExcelReadList extends AbstractReadList {
 
 				Citizen cit = null;
 				if (data != null) {
-					cit = new Citizen(data);
+
+					if (data[6] == null) {
+						wReport.report("Null DNI on row number " + r, ruta);
+					} else if (data[2] == null) {
+						wReport.report("Null birth date on row number " + r, ruta);
+					} else if (data[4] == null) {
+						wReport.report("Null address on row number " + r, ruta);
+					} else if (data[1] == null) {
+						wReport.report("Null address on row number " + r, ruta);
+					} else {
+						if (census.contains(cit)) {
+							wReport.report("Duplicated citizen on row number " + r, ruta);
+						} else {
+							cit = new Citizen(data);
+							census.add(cit);
+						}
+
+					}
 				} else {
-					wReport.report(file, "Empty row nº" + r);
+					wReport.report("Empty row nº" + r, ruta);
 				}
 
-				if (cit.getID() == null) {
-					wReport.report(file, "Null DNI on row number " + r);
-				} else if (census.contains(cit)) {
-					wReport.report(file,
-							"Duplicated citizen on row number " + r);
-				} else {
-					census.add(cit);
-				}
 			}
 
 			wb.close();
-		} catch (Exception ioe) {
+		} catch (FileNotFoundException e) {
+			wReport.report(e, "No se ha encontrado el archivo solicitado");
+		}
+
+		catch (Exception ioe) {
 			ioe.printStackTrace();
 		}
 	}
@@ -84,10 +100,8 @@ public class ExcelReadList extends AbstractReadList {
 			for (int c = 0; c < cols; c++) {
 				cell = row.getCell((short) c);
 				if (cell != null) {
-					if (cell.getCellTypeEnum() == CellType.NUMERIC &&
-							DateUtil.isCellDateFormatted(cell)) {
-						SimpleDateFormat sdf = new SimpleDateFormat(
-								"dd/MM/yyyy");
+					if (cell.getCellTypeEnum() == CellType.NUMERIC && DateUtil.isCellDateFormatted(cell)) {
+						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 						data[c] = sdf.format(cell.getDateCellValue());
 					} else {
 						data[c] = cell.toString();

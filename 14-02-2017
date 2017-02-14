@@ -1,3 +1,0 @@
-Fecha: 14-02-2017 172:18:53
-Error: Fallo al insertar en la base de datos: La clave introducida ya está en uso
-Mensaje excepcion: Write failed with error code 11000 and error message 'E11000 duplicate key error collection: test.test index: id_1 dup key: { : "123456789Z" }'
