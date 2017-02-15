@@ -17,5 +17,12 @@ public class DatabaseManagerTest {
 	public void testGetInsert() {
 		assertNotNull(SingletonDatabaseManager.getInstance().getInsertMongo());
 	}
+	
+	@Test
+	public void testClose() {
+		SingletonDatabaseManager instance = SingletonDatabaseManager.
+				getInstance();
+		instance.closeClient();
+	}
 
 }

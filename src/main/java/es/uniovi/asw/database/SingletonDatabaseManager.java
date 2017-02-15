@@ -45,9 +45,9 @@ public class SingletonDatabaseManager {
 	/**
 	 * closes the database client.
 	 */
-	public static void closeClient() {
+	public void closeClient() {
 		if (instance != null) {
-			instance.mongo.close();
+			mongo.close();
 		}
 	}
 }

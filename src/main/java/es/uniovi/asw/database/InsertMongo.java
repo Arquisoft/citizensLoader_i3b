@@ -7,7 +7,7 @@ import com.mongodb.MongoException;
 
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.reportwriter.WriteReport;
-import es.uniovi.asw.reportwriter.WriteReportPort;
+import es.uniovi.asw.reportwriter.WriteReportDefault;
 
 public class InsertMongo implements InsertDB {
 
@@ -20,7 +20,7 @@ public class InsertMongo implements InsertDB {
 	 * @param users - mongo collection
 	 */
 	public InsertMongo(DBCollection users) {
-		this.reporter = new WriteReportPort();
+		this.reporter = new WriteReportDefault();
 
 		this.users = users;
 	}

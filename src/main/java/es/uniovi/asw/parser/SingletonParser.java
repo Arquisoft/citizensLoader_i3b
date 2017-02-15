@@ -1,5 +1,7 @@
 package es.uniovi.asw.parser;
 
+import es.uniovi.asw.parser.lettergenerators.PDFLetterGenerator;
+import es.uniovi.asw.parser.lettergenerators.WordLetterGenerator;
 import es.uniovi.asw.parser.readers.ExcelReadList;
 
 /**
@@ -9,9 +11,13 @@ import es.uniovi.asw.parser.readers.ExcelReadList;
 public class SingletonParser {
 	private static SingletonParser instance;
 	private ExcelReadList excelRL;
+	private ExcelReadList excelRLWordLetter;
+	private ExcelReadList excelRLPDFLetter;
 
 	private SingletonParser() {
 		excelRL = new ExcelReadList();
+		excelRLWordLetter = new ExcelReadList(new WordLetterGenerator());
+		excelRLPDFLetter = new ExcelReadList(new PDFLetterGenerator());
 	}
 
 	public static SingletonParser getInstance() {
@@ -21,7 +27,15 @@ public class SingletonParser {
 		return instance;
 	}
 
-	public ExcelReadList getDefaultExcelReadList() {
+	public ReadList getDefaultExcelReadList() {
 		return excelRL;
+	}
+	
+	public ReadList getWorldLetterExcelReadList() {
+		return excelRLWordLetter;
+	}
+	
+	public ReadList getPDFLetterExcelReadList() {
+		return excelRLPDFLetter;
 	}
 }

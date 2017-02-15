@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author Gonzalo de la Cruz Fernández - UO244583
  *
  */
-public class WriteReportPort implements WriteReport {
+public class WriteReportDefault implements WriteReport {
 
 	private File file;
 	private SimpleDateFormat filenameFormat = new SimpleDateFormat(
@@ -35,7 +35,7 @@ public class WriteReportPort implements WriteReport {
 	 * current date.
 	 * 
 	 */
-	public WriteReportPort() {
+	public WriteReportDefault() {
 
 		Date currentDate = new Date();
 		String filename = filenameFormat.format(currentDate)
