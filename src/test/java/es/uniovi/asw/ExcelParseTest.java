@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
+import org.assertj.core.util.Files;
 import org.junit.Test;
 
 import es.uniovi.asw.parser.Citizen;
@@ -51,6 +52,7 @@ public class ExcelParseTest {
 		readData = rl.parse("archivoQueNoExiste");
 		
 		assertTrue(file.exists());
+		Files.delete(file);
 	}
 
 	@Test
@@ -69,6 +71,7 @@ public class ExcelParseTest {
 		readData = rl.parse("src/test/resources/test3.xlsx");
 		
 		assertTrue(file.exists());
+		Files.delete(file);
 	}
 
 }
