@@ -11,44 +11,40 @@ import java.util.Locale;
 import org.apache.log4j.Logger;
 
 /**
- * Implementación de WriteReport que escribe en un archivo de texto los errores
- * detectados tanto al parsear el archivo excel como errores relacionados con la
- * base de datos (insertar duplicados, fallos de runtime en la BBDD etc)
  * 
- * Se crea un archivo de Log diario, y todos los errores que se den a lo largo
- * del día se especificarán en dicho archivo. El nombre del archivo es la fecha
- * del día del cual guarda los errores
+ * WriteReport implementation. Detected errors during the parsing of the Excel file 
+ * or the database access are stores in a log file. This log file is generated
+ * daily. The name of the file is the same as the date of generation.
  * 
  * @author Gonzalo de la Cruz Fernández - UO244583
  *
  */
 public class WriteReportPort implements WriteReport {
 
-	private File archivo;
-	private SimpleDateFormat formatoNombreArchivo = new SimpleDateFormat(
+	private File file;
+	private SimpleDateFormat filenameFormat = new SimpleDateFormat(
 			"dd-MM-yyyy", Locale.getDefault());
-	private SimpleDateFormat formatoFechaHoraReport = new SimpleDateFormat(
+	private SimpleDateFormat reportHourFormat = new SimpleDateFormat(
 			"dd-MM-yyyy HH:mm:ss", Locale.getDefault());
 
 	private Logger log = Logger.getRootLogger();
 
 	/**
-	 * Constructor el cual en función de la fecha de hoy busca el archivo en el
-	 * cual tiene que escribir los errores
 	 * 
-	 * Si aun no se ha creado el archivo de hoy, se encarga de crearlo y su
-	 * nombre sera la fecha del día de hoy
+	 * Class constructor, creates a new log file if one does not exist for the
+	 * current date.
+	 * 
 	 */
 	public WriteReportPort() {
 
-		Date fechaActual = new Date();
-		String nombreFichero = formatoNombreArchivo.format(fechaActual)
+		Date currentDate = new Date();
+		String filename = filenameFormat.format(currentDate)
 				+ ".txt";
-		this.archivo = new File(nombreFichero);
+		this.file = new File(filename);
 
 		try {
-			if (!archivo.exists()) {
-				archivo.createNewFile();
+			if (!file.exists()) {
+				file.createNewFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,32 +53,32 @@ public class WriteReportPort implements WriteReport {
 
 	@Override
 	/**
-	 * Metodo que se utiliza en el parser para notificar los errores producidos
-	 * al leer el archivo correspondiente.
 	 * 
-	 * Escribe en el archivo correspondiente al dia de hoy el error indicando el
-	 * momento en el que se produjo,el archivo que se estaba parseando y la
-	 * descripcion del error
+	 * Method used to notify the user about every error produced when reading
+	 * a certain file.
 	 * 
-	 * @param mensajeDeError
-	 *            - Descripcion del error producido
+	 * Writes into the corresponding log file the moment when the error happened,
+	 * the file it was parsing and the error trace.
 	 * 
-	 * @param archivo
-	 *            - archivo que se estaba parseando cuando se produjo el error
+	 * @param errorMessage
+	 *            - Description corresponding to the error.
+	 * 
+	 * @param file
+	 *            - File that was being parsed when the error occurred.
 	 * 
 	 */
-	public void report(String mensajeDeError, String archivo) {
+	public void report(String errorMessage, String file) {
 		try {
 			BufferedWriter writer = new BufferedWriter(
-					new FileWriter(archivo, true));
+					new FileWriter(file, true));
 
 			StringBuilder error = new StringBuilder();
 			error.append("ERROR \n");
 			error.append("------------------------------\n");
-			error.append("Fecha y hora: "
-					+ formatoFechaHoraReport.format(new Date()) + "\n");
-			error.append("Nombre del archivo: " + archivo + "\n");
-			error.append("Error: " + mensajeDeError + "\n\n");
+			error.append("Date and hour: "
+					+ reportHourFormat.format(new Date()) + "\n");
+			error.append("Filename: " + file + "\n");
+			error.append("Error: " + errorMessage + "\n\n");
 
 			writer.append(error);
 			log.info(error);
@@ -95,30 +91,30 @@ public class WriteReportPort implements WriteReport {
 
 	@Override
 	/**
-	 * Metodo que se utiliza cuando se producen errores realizando operaciones
-	 * en la base de datos
 	 * 
+	 * Method called when an exception is produced during an operation
+	 * in which the database is involved.
 	 * 
 	 * @param e
-	 *            - excepcion producida
+	 *            - Produced exception
 	 *
-	 * @param mensajeDeError
-	 *            - descripcion del error producido
+	 * @param errorMessage
+	 *            - Contains the description of the error
 	 */
-	public void report(Exception e, String mensajeDeError) {
+	public void report(Exception e, String errorMessage) {
 		try {
 
 			BufferedWriter writer = new BufferedWriter(
-					new FileWriter(archivo, true));
+					new FileWriter(file, true));
 
 			StringBuilder error = new StringBuilder();
 
 			error.append("ERROR \n");
 			error.append("------------------------------\n");
-			error.append("Fecha y hora: "
-					+ formatoFechaHoraReport.format(new Date()) + "\n");
-			error.append("Error: " + mensajeDeError + "\n");
-			error.append("Mensaje excepcion: " + e.getMessage() + "\n\n");
+			error.append("Date and hour: "
+					+ reportHourFormat.format(new Date()) + "\n");
+			error.append("Error: " + errorMessage + "\n");
+			error.append("Message exception: " + e.getMessage() + "\n\n");
 
 			writer.append(error);
 			log.info(error);

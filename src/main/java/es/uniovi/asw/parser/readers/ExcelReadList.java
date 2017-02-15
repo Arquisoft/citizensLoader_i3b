@@ -57,15 +57,6 @@ public class ExcelReadList extends AbstractReadList {
 
 				Citizen cit = null;
 
-				/**
-				 * Cambie las siguientes lineas porque si creabas un nuevo
-				 * citizen con algunos datos nulos (por ejemplo la fecha de
-				 * nacimiento) en ocasiones daba null pointer exceptions
-				 * 
-				 * Además ahora comprueba que la fila tenga todos los datos
-				 * cumplimentados y sino se loggea el error
-				 */
-
 				if (data != null) {
 
 					if (data[6] == null) {

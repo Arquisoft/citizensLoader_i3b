@@ -37,8 +37,8 @@ public class ExcelParseTest {
 
 	@Test
 	/**
-	 * Este test no comprueba nada Simplemente lo utilizo para ver si se escribe
-	 * el error correspondiente en el archivo de logging
+	 * Checks whether the file exists or not.
+	 * 
 	 */
 	public void fileNotFound() {
 		SimpleDateFormat formatofilename = new SimpleDateFormat(
@@ -55,8 +55,8 @@ public class ExcelParseTest {
 
 	@Test
 	/**
-	 * Este test no comprueba nada Simplemente lo utilizo para ver si se escribe
-	 * el error correspondiente en el archivo de logging
+	 * Checks if the report is generated successfully.
+	 * 
 	 */
 	public void testFilaSinDNI() {
 		SimpleDateFormat formatofilename = new SimpleDateFormat(
