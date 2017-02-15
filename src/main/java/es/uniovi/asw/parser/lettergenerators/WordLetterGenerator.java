@@ -25,15 +25,25 @@ public class WordLetterGenerator implements LetterGenerator {
 		// Write the Document in file system
 		FileOutputStream out;
 		try {
-			out = new FileOutputStream(new File("createdocument.docx"));
+			out = new FileOutputStream(new File(c.getID()+".docx"));
 			XWPFParagraph paragraph = document.createParagraph();
-			XWPFRun run = paragraph.createRun();
+			XWPFRun runNames = paragraph.createRun();
 			
 			//Add text to the document 
-			run.setText("Mr/Mrs " + c.getName() + " " + c.getlastName() + ",\n"
-					+ "Your login data has been generated:\n" + "\tUsername: "
-					+ c.getEmail() + "\n" + "\tPassword: " + c.getPassword()
-					+ "\n");
+			runNames.setText("Mr/Mrs " + c.getName() + " " + c.getlastName() +",");
+			runNames.addBreak();
+			
+			XWPFRun runLogin = paragraph.createRun();
+			runLogin.setText("Your login data has been generated:");
+			runLogin.addBreak();
+			
+			XWPFRun runUser = paragraph.createRun();
+			runUser.setText("Username: "+ c.getEmail());
+			runUser.addBreak();
+			
+			XWPFRun runPass = paragraph.createRun();
+			runPass.setText("Password: " + c.getPassword());
+
 			document.write(out);
 			out.close();
 			document.close();
