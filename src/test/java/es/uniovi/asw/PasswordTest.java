@@ -14,12 +14,12 @@ public class PasswordTest {
 
 	@Test
 	public void testNotNull() {
-		Citizen c = new Citizen("a","b","a@a.com","10/10/2010","a","a","7198791Z",
-				"2652165165", "1234");
+		Citizen c = new Citizen("a", "b", "a@a.com", "10/10/2010", "a", "a",
+				"7198791Z", "2652165165", 1234);
 		Set<Citizen> census = new HashSet<Citizen>();
 		census.add(c);
 		PasswordGenerator.createPasswords(census);
-		assertTrue(c.getPassword()!=null);
+		assertTrue(c.getPassword() != null);
 	}
 
 }

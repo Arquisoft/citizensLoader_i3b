@@ -16,9 +16,9 @@ public class WordGeneratorTest {
 	public void test() {
 		WordLetterGenerator wordg = new WordLetterGenerator();
 		Citizen c = new Citizen("adri", "mc", "zoo@snek.com", "10/10/2010", "a",
-				"a","123456789Z", "132456789", "1234");
+				"a", "123456789Z", "132456789", 1234);
 		wordg.generatePersonalLetter(c);
-		File f = new File(c.getID()+".docx");
+		File f = new File(c.getID() + ".docx");
 		assertTrue(f.exists());
 		Files.delete(f);
 	}

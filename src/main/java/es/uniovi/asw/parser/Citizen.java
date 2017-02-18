@@ -6,8 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author Oriol.
- * Class use to represent the citizens and parse their data.
+ * @author Oriol. Class use to represent the citizens and parse their data.
  */
 public class Citizen {
 	private String firstName;
@@ -23,7 +22,7 @@ public class Citizen {
 
 	public Citizen(String firstName, String lastName, String email,
 			String birthDate, String address, String nationality, String ID,
-			String NIF, String pollingStation) {
+			String NIF, int pollingStation) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -33,7 +32,22 @@ public class Citizen {
 		this.nationality = nationality;
 		this.ID = ID;
 		this.NIF = NIF;
-		this.pollingStation = Integer.parseInt(pollingStation);
+		this.pollingStation = pollingStation;
+	}
+
+	public Citizen(String firstName, String lastName, String email,
+			Date birthDate, String address, String nationality, String ID,
+			String NIF, int pollingStation) {
+
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.birthDate = birthDate;
+		this.address = address;
+		this.nationality = nationality;
+		this.ID = ID;
+		this.NIF = NIF;
+		this.pollingStation = pollingStation;
 	}
 
 	public Citizen(String[] data) {
@@ -47,7 +61,7 @@ public class Citizen {
 		this.NIF = data[7];
 		this.pollingStation = Integer.parseInt(data[8].replace(".0", ""));
 	}
-	
+
 	private void setbirthDate(String birthDate) {
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = null;
@@ -133,7 +147,7 @@ public class Citizen {
 		return "Citizen [firstName=" + firstName + ", lastName=" + lastName
 				+ ", email=" + email + ", birthDate=" + birthDate + ", address="
 				+ address + ", ID=" + ID + ", nationality=" + nationality + ","
-				+ " NIF=" + NIF +", pollingStation=" + pollingStation + "]";
+				+ " NIF=" + NIF + ", pollingStation=" + pollingStation + "]";
 	}
 
 }
