@@ -72,6 +72,15 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
 				"unique", true));
 	}
+	
+	/**
+	 * 
+	 * @param c
+	 * 
+	 * Inserts a new document into the database
+	 * with the citizen passed as a parameter.
+	 * 
+	 */
 
 	@Override
 	public boolean insert(Citizen c) {
@@ -99,6 +108,14 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		return false;
 
 	}
+	
+	/**
+	 * 
+	 * @param ID
+	 * 
+	 * Removes a document from the database.
+	 * 
+	 */
 
 	@Override
 	public void remove(String ID) {
@@ -107,9 +124,15 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		users.remove(document);
 	}
 
+
 	/**
-	 * Is there any way to map the objects or something like in JPA without
-	 * doing MILLIONS OF CASTINGS????
+	 * 
+	 * @param ID
+	 * 
+	 * Returns a document (citizen) from the database
+	 * corresponding to the id passed as a 
+	 * parameter.
+	 * 
 	 */
 
 	@Override
@@ -128,6 +151,13 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		}
 		return c;
 	}
+	
+	/**
+	 * 
+	 * Returns every document (citizen) in the 
+	 * databse.
+	 * 
+	 */
 
 	@Override
 	public List<Citizen> findAll() {
@@ -148,7 +178,13 @@ public class CitizenDaoImplMongo implements CitizenDao {
 
 		return allCitizens;
 	}
-
+	
+	/**
+	 * 
+	 * Clears the database.
+	 * 
+	 */
+	
 	@Override
 	public void cleanDatabase() {
 		users.remove(new BasicDBObject());

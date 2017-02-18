@@ -16,7 +16,6 @@ public class LoadUsers {
 		runner.run(ruta);
 	}
 
-	// TODO
 	private void run(String... ruta) {
 		if (ruta.length < 1) {
 			System.err.println("Input the name of the file.");
