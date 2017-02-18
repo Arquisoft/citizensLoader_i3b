@@ -1,4 +1,4 @@
-package allTests;
+package alltests;
 
 import static org.junit.Assert.*;
 
@@ -29,12 +29,24 @@ public class LoadUsersTest {
 		assertTrue(outContent.toString().contains("90500084Y letter sent."));
 
 	}
+	
+	@Test
+	public void testNoFileError() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setErr(new PrintStream(outContent));
+		LoadUsers.main();
+		assertTrue(outContent.toString().contains("Input the name of the file."));
+	}
 
 	public void clearDatabase() {
 		@SuppressWarnings("resource")
 		MongoClient mongoClient = new MongoClient("localhost" , 27017);
 		MongoDatabase db = mongoClient.getDatabase("Citizens");
 		db.getCollection("users").deleteMany(new Document());
+	}
+	
+	public void testFileError() {
+		
 	}
 
 }
