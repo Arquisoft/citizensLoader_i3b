@@ -47,6 +47,9 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		this.mongo = new MongoClient(host, port);
 		this.db = mongo.getDB(database);
 		this.users = db.getCollection(collection);
+
+		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
+				"unique", true));
 	}
 
 	/**
