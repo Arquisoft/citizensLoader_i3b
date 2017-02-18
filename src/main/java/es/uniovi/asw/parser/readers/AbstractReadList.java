@@ -2,6 +2,8 @@ package es.uniovi.asw.parser.readers;
 
 import java.util.Set;
 
+import es.uniovi.asw.database.CitizenDao;
+import es.uniovi.asw.database.MongoPersistanceFactory;
 import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.lettergenerators.ConsoleLetterGenerator;
@@ -34,19 +36,23 @@ public abstract class AbstractReadList implements ReadList {
 	public Set<Citizen> parse(String ruta) {
 
 		doParse(ruta);
+
 		if (census != null && census.size() > 0) {
 			PasswordGenerator.createPasswords(census);
-			generateLetters();
+			insertCitizens(census);
 		}
 		return census;
 	}
 
-	protected abstract void doParse(String ruta);
-
-	private void generateLetters() {
+	private void insertCitizens(Set<Citizen> census) {
+		CitizenDao dao = MongoPersistanceFactory.getCitizenDao();
 		for (Citizen c : census) {
-			letterGen.generatePersonalLetter(c);
+			if (dao.insert(c)) {
+				letterGen.generatePersonalLetter(c);
+			}
 		}
 	}
+
+	protected abstract void doParse(String ruta);
 
 }

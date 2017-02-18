@@ -74,7 +74,7 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	}
 
 	@Override
-	public void insert(Citizen c) {
+	public boolean insert(Citizen c) {
 		BasicDBObject document = new BasicDBObject();
 		document.put("firstName", c.getName());
 		document.put("lastName", c.getlastName());
@@ -88,12 +88,15 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		document.put("pollingStation", c.getpollingStation());
 		try {
 			users.insert(document);
+			reporter.logDatabaseInsertion(c);
+			return true;
 		} catch (DuplicateKeyException me) {
-			reporter.report(me, "Fallo al insertar en la base de datos: "
-					+ "La clave introducida ya está en uso");
+			reporter.report(me, "Error inserting in the database: "
+					+ "The inserted Key is in the database");
 		} catch (MongoException me) {
-			reporter.report(me, "Fallo al insertar en la base de datos");
+			reporter.report(me, "Error inserting in the database");
 		}
+		return false;
 
 	}
 

@@ -12,7 +12,7 @@ import es.uniovi.asw.parser.Citizen;
  */
 public interface CitizenDao {
 
-	void insert(Citizen c);
+	boolean insert(Citizen c);
 
 	Citizen findById(String ID);
 

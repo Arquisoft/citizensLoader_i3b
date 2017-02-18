@@ -30,16 +30,11 @@ public class LoadUsers {
 
 		ReadList rl = SingletonParser.getInstance().getDefaultExcelReadList();
 		Set<Citizen> census = rl.parse(ruta[0]);
-
-		insertCitizens(census);
-
-		System.out.println("Users added successfully");
+		// if (census != null) {
+		// insertCitizens(census);
+		//
+		// System.out.println("Users added successfully");
+		// }
 	}
 
-	private void insertCitizens(Set<Citizen> census) {
-		CitizenDao dao = MongoPersistanceFactory.getCitizenDao();
-		for (Citizen c : census) {
-			dao.insert(c);
-		}
-	}
 }
