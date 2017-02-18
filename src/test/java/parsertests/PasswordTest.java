@@ -1,4 +1,4 @@
-package parserTests;
+package parsertests;
 
 import static org.junit.Assert.*;
 

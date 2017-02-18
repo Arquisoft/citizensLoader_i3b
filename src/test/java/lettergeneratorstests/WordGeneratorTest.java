@@ -1,4 +1,4 @@
-package letterGeneratorsTest;
+package lettergeneratorstests;
 
 import static org.junit.Assert.assertTrue;
 

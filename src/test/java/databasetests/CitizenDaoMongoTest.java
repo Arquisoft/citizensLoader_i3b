@@ -1,4 +1,4 @@
-package databaseTests;
+package databasetests;
 
 import static org.junit.Assert.*;
 

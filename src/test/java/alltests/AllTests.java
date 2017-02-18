@@ -4,9 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import databaseTests.AllDatabaseTests;
-import letterGeneratorsTest.AllGeneratorTests;
-import parserTests.AllParserTests;
+import databasetests.AllDatabaseTests;
+import lettergeneratorstests.AllGeneratorTests;
+import parsertests.AllParserTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ AllDatabaseTests.class, AllGeneratorTests.class,
