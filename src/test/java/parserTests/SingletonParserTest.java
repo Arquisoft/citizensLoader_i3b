@@ -1,4 +1,4 @@
-package es.uniovi.asw;
+package parserTests;
 
 import static org.junit.Assert.*;
 

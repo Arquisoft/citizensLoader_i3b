@@ -1,4 +1,4 @@
-package es.uniovi.asw;
+package letterGeneratorsTest;
 
 import static org.junit.Assert.assertTrue;
 

@@ -1,10 +1,5 @@
 package es.uniovi.asw;
 
-import java.util.Set;
-
-import es.uniovi.asw.database.CitizenDao;
-import es.uniovi.asw.database.MongoPersistanceFactory;
-import es.uniovi.asw.parser.Citizen;
 import es.uniovi.asw.parser.ReadList;
 import es.uniovi.asw.parser.SingletonParser;
 
@@ -29,12 +24,7 @@ public class LoadUsers {
 		}
 
 		ReadList rl = SingletonParser.getInstance().getDefaultExcelReadList();
-		Set<Citizen> census = rl.parse(ruta[0]);
-		// if (census != null) {
-		// insertCitizens(census);
-		//
-		// System.out.println("Users added successfully");
-		// }
+		rl.parse(ruta[0]);
 	}
 
 }

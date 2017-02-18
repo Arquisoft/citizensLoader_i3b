@@ -1,4 +1,4 @@
-package es.uniovi.asw;
+package databaseTests;
 
 import static org.junit.Assert.*;
 
