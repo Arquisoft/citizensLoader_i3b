@@ -5,7 +5,7 @@ import java.util.Set;
 
 import es.uniovi.asw.parser.Citizen;
 
-public class PasswordGenerator {
+public static class PasswordGenerator {
 	private final static String passCharacters = "0123456789ABCDEFGHIJKLMNOP"
 			+ "QRSTUVWXYZabcdefghijklmnopqrstuvwxyz$-_¡!?¿@";
 	private final static int passLength = 12;
