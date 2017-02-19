@@ -19,6 +19,8 @@ public class CitizenTest {
 		Citizen dummy3 = null;
 		Citizen dummy4 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a",
 				"a", null, "132456789", 1234);
+		Citizen dummy5 = new Citizen("a", "b", "b@a.com", "10/10/2010", "a",
+				"a", null, "132456789", 1234);
 		Double doub = new Double(5.0);
 
 		assertTrue(dummy.equals(dummy));
@@ -27,6 +29,7 @@ public class CitizenTest {
 		assertFalse(dummy.equals(dummy3));
 		assertFalse(dummy4.equals(dummy1));
 		assertFalse(dummy.equals(doub));
+		assertTrue(dummy4.equals(dummy5));
 	}
 
 }
