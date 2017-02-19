@@ -68,7 +68,7 @@ public class WriteReportDefault implements WriteReport {
 	 */
 	public void report(String errorMessage, String file) {
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file,
+			BufferedWriter writer = new BufferedWriter(new FileWriter(this.file,
 					true));
 
 			StringBuilder error = new StringBuilder();
