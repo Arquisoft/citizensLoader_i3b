@@ -17,8 +17,6 @@ import es.uniovi.asw.parser.readers.TxtReadList;
 
 public class TxtParseTest {
 
-	private Set<Citizen> readData;
-
 	@Before
 	public void clearDatabase() {
 		@SuppressWarnings("resource")
@@ -37,7 +35,7 @@ public class TxtParseTest {
 				+ "birthDate=Sun May 19 00:00:00 UTC 1996, address=C/Asturias, "
 				+ "ID=testid, nationality=camboya, NIF=1234, pollingStation=1]]";
 		ReadList rl = new TxtReadList();
-		readData = rl.parse("src/test/resources/test.txt");
+		Set<Citizen> readData = rl.parse("src/test/resources/test.txt");
 		assertTrue(readData.toString().equals(resultSt) || readData.toString().equals(resultTravis));
 
 	}
