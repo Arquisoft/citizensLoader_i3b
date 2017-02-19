@@ -60,7 +60,7 @@ public class ExcelParseTest {
 	 * Checks if the report is generated successfully.
 	 * 
 	 */
-	public void testFilaSinDNI() {
+	public void testNoDNI() {
 		SimpleDateFormat formatofilename = new SimpleDateFormat(
 				"dd-MM-yyyy", Locale.getDefault());
 		String filename = formatofilename.format(new Date())
@@ -69,6 +69,82 @@ public class ExcelParseTest {
 		
 		ReadList rl = new ExcelReadList();
 		readData = rl.parse("src/test/resources/test3.xlsx");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
+	/**
+	 * Checks that the report file is generated when the excel doesn't have a name
+	 * 
+	 */
+	@Test
+	public void testNoName() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new ExcelReadList();
+		readData = rl.parse("src/test/resources/test4.xlsx");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
+	/**
+	 * Checks that the report file is generated when the excel doesn't have a surname
+	 * 
+	 */
+	@Test
+	public void testNoSurname() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new ExcelReadList();
+		readData = rl.parse("src/test/resources/test5.xlsx");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
+	/**
+	 * Checks that the report file is generated when the excel doesn't have a birthdate
+	 * 
+	 */
+	@Test
+	public void testNoBirthDate() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new ExcelReadList();
+		readData = rl.parse("src/test/resources/test6.xlsx");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
+	/**
+	 * Checks that the report file is generated when the excel doesn't have the NIF
+	 * 
+	 */
+	@Test
+	public void testNoNIF() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new ExcelReadList();
+		readData = rl.parse("src/test/resources/test7.xlsx");
 		
 		assertTrue(file.exists());
 		Files.delete(file);
