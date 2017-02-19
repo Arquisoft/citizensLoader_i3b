@@ -22,7 +22,7 @@ public class LoadUsers {
 			return;
 		}
 
-		ReadList rl = SingletonParser.getInstance().getDefaultTxtReadList();
+		ReadList rl = SingletonParser.getInstance().getDefaultExcelReadList();
 		rl.parse(ruta[0]);
 	}
 
