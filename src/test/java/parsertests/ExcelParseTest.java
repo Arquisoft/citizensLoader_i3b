@@ -149,5 +149,43 @@ public class ExcelParseTest {
 		assertTrue(file.exists());
 		Files.delete(file);
 	}
+	
+	/**
+	 * Checks that the report file is generated when the excel doesn't have an address
+	 * 
+	 */
+	@Test
+	public void testNoAddress() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new ExcelReadList();
+		readData = rl.parse("src/test/resources/test8.xlsx");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
+	/**
+	 * Checks that the report file is generated when the citizen is duplicated
+	 * 
+	 */
+	@Test
+	public void testNoDuplicate() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new ExcelReadList();
+		readData = rl.parse("src/test/resources/test9.xlsx");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
 
 }

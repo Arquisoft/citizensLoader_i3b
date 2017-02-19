@@ -141,5 +141,44 @@ public class TxtParseTest {
 		assertTrue(file.exists());
 		Files.delete(file);
 	}
+	
+	/**
+	 * Checks that the report file is generated when the excel doesn't have an address
+	 * 
+	 */
+	@Test
+	public void testNoAddress() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test8.txt");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
+	/**
+	 * Checks that the report file is generated when the citizen is duplicated
+	 * 
+	 */
+	@Test
+	public void testDuplicate() {
+		SimpleDateFormat formatofilename = new SimpleDateFormat(
+				"dd-MM-yyyy", Locale.getDefault());
+		String filename = formatofilename.format(new Date())
+				+ ".txt";
+		File file = new File(filename);
+		
+		ReadList rl = new TxtReadList();
+		readData = rl.parse("src/test/resources/test9.txt");
+		
+		assertTrue(file.exists());
+		Files.delete(file);
+	}
+	
 
 }
