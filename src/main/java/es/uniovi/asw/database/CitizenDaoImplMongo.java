@@ -1,8 +1,10 @@
 package es.uniovi.asw.database;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -25,17 +27,12 @@ import es.uniovi.asw.reportwriter.WriteReportDefault;
  */
 public class CitizenDaoImplMongo implements CitizenDao {
 
-	// Extract to properties in the future?
-
-	private final static String host = "localhost";
-	private final static int port = 27017;
-	private final static String database = "Citizens";
-	private final static String collection = "users";
 
 	private MongoClient mongo;
 	private DB db;
 	private DBCollection users;
 	private WriteReport reporter;
+	private Properties properties;
 
 	/**
 	 * Default constructor that initializes the database from the constants
@@ -43,13 +40,35 @@ public class CitizenDaoImplMongo implements CitizenDao {
 	 */
 	@SuppressWarnings("deprecation")
 	public CitizenDaoImplMongo() {
-		this.reporter = new WriteReportDefault();
-		this.mongo = new MongoClient(host, port);
-		this.db = mongo.getDB(database);
-		this.users = db.getCollection(collection);
+		
+		if (loadProperties()) {
 
-		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
-				"unique", true));
+			this.reporter = new WriteReportDefault();
+			this.mongo = new MongoClient(properties.getProperty("host"), Integer
+					.parseInt(properties.getProperty("port")));
+			this.db = mongo.getDB(properties.getProperty("database"));
+			this.users = db.getCollection(properties.getProperty("collection"));
+
+			users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
+					"unique", true));
+		}
+	}
+
+	/**
+	 * Loads the database properties file
+	 * 
+	 * @return True if we could load the file without problems, false otherwise
+	 */
+	private boolean loadProperties() {
+		try {
+			FileInputStream input = new FileInputStream("src/main/resources/database.properties");
+			this.properties = new Properties();
+			this.properties.load(input);
+			return true;
+		} catch (Exception e) {
+			reporter.report(e, "Error loading database.properties file");
+			return false;
+		}
 	}
 
 	/**
@@ -72,13 +91,13 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		users.createIndex(new BasicDBObject("id", 1), new BasicDBObject(
 				"unique", true));
 	}
-	
+
 	/**
 	 * 
 	 * @param c
 	 * 
-	 * Inserts a new document into the database
-	 * with the citizen passed as a parameter.
+	 *            Inserts a new document into the database with the citizen
+	 *            passed as a parameter.
 	 * 
 	 */
 
@@ -108,12 +127,12 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		return false;
 
 	}
-	
+
 	/**
 	 * 
 	 * @param ID
 	 * 
-	 * Removes a document from the database.
+	 *            Removes a document from the database.
 	 * 
 	 */
 
@@ -124,14 +143,12 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		users.remove(document);
 	}
 
-
 	/**
 	 * 
 	 * @param ID
 	 * 
-	 * Returns a document (citizen) from the database
-	 * corresponding to the id passed as a 
-	 * parameter.
+	 *            Returns a document (citizen) from the database corresponding
+	 *            to the id passed as a parameter.
 	 * 
 	 */
 
@@ -151,11 +168,10 @@ public class CitizenDaoImplMongo implements CitizenDao {
 		}
 		return c;
 	}
-	
+
 	/**
 	 * 
-	 * Returns every document (citizen) in the 
-	 * databse.
+	 * Returns every document (citizen) in the databse.
 	 * 
 	 */
 
@@ -178,13 +194,13 @@ public class CitizenDaoImplMongo implements CitizenDao {
 
 		return allCitizens;
 	}
-	
+
 	/**
 	 * 
 	 * Clears the database.
 	 * 
 	 */
-	
+
 	@Override
 	public void cleanDatabase() {
 		users.remove(new BasicDBObject());
