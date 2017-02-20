@@ -20,6 +20,9 @@ public class PasswordTest {
 		census.add(c);
 		PasswordGenerator.createPasswords(census);
 		assertTrue(c.getPassword() != null);
+
+		PasswordGenerator pass = new PasswordGenerator();
+		assertNotNull(pass);
 	}
 
 }
