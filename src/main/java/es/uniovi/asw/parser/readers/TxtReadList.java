@@ -28,9 +28,10 @@ public class TxtReadList extends AbstractReadList {
 			String strLine;
 			census = new HashSet<Citizen>();
 			int r = 1;
+			int cols = 9;
 			while ((strLine = br.readLine()) != null) {
 				String[] split = strLine.split(";");
-				if (split != null) {
+				if (split.length == cols) {
 					if (split[6].equals("")) {
 						wReport.report("Null DNI on row number " + r, ruta);
 					} else if (split[0].equals("")) {
@@ -52,7 +53,8 @@ public class TxtReadList extends AbstractReadList {
 						}
 					}
 				} else {
-					wReport.report("Empty row nº" + r, ruta);
+					wReport.report("Empty or shorter than expected or larger than expected"
+							+ " row nº" + r, ruta);
 				}
 				r++;
 			}
